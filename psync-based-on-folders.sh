@@ -18,7 +18,7 @@ declare -a special_dir_list
 
 i=0
 j=0
-while read -r line; do
+while IFS= read -r line; do
     if [[ "$line" =~ \' ]]; then
 	special_dir_list[$j]="$line"
 	j=$((j+1))

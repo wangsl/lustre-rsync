@@ -15,7 +15,7 @@ function _rsync_folder_recursive()
     declare -a target_dirs
 
     local i=0
-    while read -r line; do
+    while IFS= read -r line; do
 	source_dirs[$i]="$line"
 	target_dirs[$i]="$(echo "$line" | sed -e "s#^$source_prefix#$target_prefix#")"
 	$psync_based_on_files "${source_dirs[$i]}" "${target_dirs[$i]}"

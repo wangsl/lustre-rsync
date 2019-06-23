@@ -21,7 +21,7 @@ if [ -s $tmp_dir/$prefix.full ]; then
     
     for lst in $tmp_dir/$prefix-*; do
 	{
-	    while read -r line; do
+	    while IFS= read -r line; do
 		printf '/%s\n' "$(basename "$line")"
 	    done < $lst
 	} > $lst.tmp
@@ -35,7 +35,7 @@ rm -rf $tmp_dir/$prefix.full
 n_source=$(lfs find "$source_dir" --maxdepth 1 -type f | wc -l)
 n_target=$(lfs find "$target_dir" --maxdepth 1 -type f | wc -l)
 
-info="[$(date '+%Y-%m-%dT%H:%M:%S.%3N')] $(hostname); $source_dir ; $log_file"
+info="[$(date '+%Y-%m-%dT%H:%M:%S.%3N')] $(hostname); $source_dir; $log_file"
 if [ $n_source -eq $n_target ]; then
     printf '%s \e[0;34m==DONE==\e[0m\n' "$info"
 else
